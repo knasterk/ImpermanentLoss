@@ -6,39 +6,6 @@ from simulate import plot_impermanet_loss, save_results
 DOWNLOAD_DATA = False
 FEE_TIER = 0.0001
 
-# pair, t0, t1 = get_scenarios('DAI/ETH_all')
-# price_data, swap_data = get_data('DAI/ETH', download=DOWNLOAD_DATA)
-# sim_results, sim_performance, sim_data_collect, strategy = \
-#     simulate(price_data, swap_data, t0, t1, fee_tier=FEE_TIER)
-# best_results, values, best_id = get_best_strategy(sim_results, strategy)
-# fname = f'results/DAT-ETH_{t0.isoformat()[:10]}_{t1.isoformat()[:10]}.csv'
-# # fname = 'results/MKR-ETH_2021-10-23_2022-03-19.csv'
-# results = save_results(best_results, fname)
-# title = 'DAI/ETH -- all'
-# title = f'DAI/ETH -- {t0.isoformat()[:10]} to {t1.isoformat()[:10]}'
-# fig_fname = 'figs/DAI-ETH_all'
-# plot_impermanet_loss(results_fname=fname,
-#                      title=title,
-#                      quoteCurrency='ETH',
-#                      fig_fname=fig_fname)
-
-# NOTE: First not nan in swap_data: 2021-10-23 14:07:12+00:00
-# pair, t0, t1 = get_scenarios('DAI/MKR_2x')
-# price_data, swap_data = get_data('DAI/MKR', download=DOWNLOAD_DATA)
-# sim_results, sim_performance, sim_data_collect, strategy = \
-#     simulate(price_data, swap_data, t0, t1, fee_tier=FEE_TIER)
-# best_results, values, best_id = get_best_strategy(sim_results, strategy)
-# fname = f'results/DAI-MKR_{t0.isoformat()[:10]}_{t1.isoformat()[:10]}.csv'
-# # fname = 'results/DAI-MKR_2021-10-23_2022-03-19.csv'
-# results = save_results(best_results, fname)
-# title = 'DAI/MKR -- 2x'
-# title = f'DAI/MKR -- {t0.isoformat()[:10]} to {t1.isoformat()[:10]}'
-# fig_fname = 'figs/DAI-MKR_2x'
-# plot_impermanet_loss(results_fname=fname,
-#                      title=title,
-#                      quoteCurrency='MKR',
-#                      fig_fname=fig_fname)
-
 pair, t0, t1 = get_scenarios('MKR/ETH_all')
 price_data, swap_data = get_data('MKR/ETH', download=DOWNLOAD_DATA)
 sim_results, sim_performance, sim_data_collect, strategy = \
