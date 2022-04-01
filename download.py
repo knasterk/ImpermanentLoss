@@ -6,25 +6,6 @@ from config import BITQUERY_API_TOKEN
 
 def get_data(pair, download=False):
     """
-    |    ETH/PSDN      |      ETH/FLX    |
-    |    OCEAN/PSDN    |      ETH/FLX    |
-    |     ETH/H2O      |      ETH/RAI    |
-    |    OCEAN/H2O     |      ETH/RAI    |
-
-    Example flipside query:
-
-        SELECT
-        	block_id,
-        	block_timestamp,
-        	pool_address,
-        	pool_name,
-        	price_0_1,
-        	price_1_0,
-        	tick,
-          	virtual_liquidity_adjusted
-        	from uniswapv3.pool_stats
-        	where pool_address = '0x14de8287adc90f0f95bf567c0707670de52e3813' and BLOCK_ID > 12300000
-        	order by block_id asc
     """
 
     if pair == 'RAI/ETH':
@@ -102,19 +83,6 @@ def get_data(pair, download=False):
         	from uniswapv3.pool_stats
         	where pool_address = '0x2a84e2bd2e961b1557d6e516ca647268b432cba4' and BLOCK_ID > 12300000
         	order by block_id asc
-
-        SELECT
-        	block_id,
-        	block_timestamp,
-        	pool_address,
-        	pool_name,
-        	price_0_1,
-        	price_1_0,
-        	tick,
-          	virtual_liquidity_adjusted
-        	from uniswapv3.pool_stats
-        	where pool_address = '0x2a84e2bd2e961b1557d6e516ca647268b432cba4' and BLOCK_ID > 12458890
-        	order by block_id asc
         '''
         flipside_queries = ['https://api.flipsidecrypto.com/api/v2/queries/a10c44cf-6db6-4e45-be92-70d1f35a11c6/data/latest']
 
@@ -131,9 +99,6 @@ def get_data(pair, download=False):
         token_1_address = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
 
         '''
-        |    OCEAN/H20     |      ETH/DAI    |
-        |     ETH/H2O      |      ETH/RAI    |
-
         SELECT
         	block_id,
         	block_timestamp,
@@ -191,9 +156,5 @@ def get_data(pair, download=False):
                                                      BITQUERY_API_TOKEN,
                                                      file_name,
                                                      download)
-
-    # import ipdb; ipdb.set_trace()
-    # price_data0 = GetPoolData.download_bigquery_price(token_0_address, price_data_begin, price_data_end)
-    # price_data1 = GetPoolData.download_bigquery_price(token_1_address, price_data_begin, price_data_end)
 
     return price_data, swap_data
