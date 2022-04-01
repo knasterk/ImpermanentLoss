@@ -37,6 +37,17 @@ Thus, we focus our IL-simulations on the following pairs:
 <!-- |    H20/OCEAN     |      DAI/ETH    | -->
 
 
+## How to run the script
+The script `simulation_script.py` will run the simulations described below and generate the figures.
+ * Clone [Gamma Strategy's](https://www.gammastrategies.org/) [Uniswap v3 Active Strategy Framework and Simulator](https://github.com/GammaStrategies/active-strategy-framework).
+ * Place these scripts in the the resulting `active-strategy-framework` directory.
+ * See [Uniswap v3 Active Strategy Framework and Simulator](https://github.com/GammaStrategies/active-strategy-framework).
+ * Obtain a free API key from Bitquery.
+ * Save the API key in a file in `config.py` in the `active-strategy-framework` directory with the variable name `BITQUERY_API_TOKEN` (eg. `BITQUERY_API_TOKEN = <api_key>`).
+ * Make the directories `data`, `figs` and `results` in the `active-strategy-framework` directory.
+ * Set the variable `DOWNLAD_DATA = True` in the `simulation_script.py`.
+ * Run `simulation_script.py` (set `DOWNLAD_DATA = True` once the data is downloaded).
+
 
 ## Results
 
