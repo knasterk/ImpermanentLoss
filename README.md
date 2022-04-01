@@ -42,28 +42,28 @@ Thus, we focus our IL-simulations on the following pairs:
 
 ### DAI/MKR
 To get a sense of what IL to expect in the future for the H2O/PSDN pair, we simulated IL on historical data of the DAI/MKR pair. From the simulation, it is apparent that the IL increases (down to -12 %) during fast price changes (end of January 2022). However, for a new pair like H2O/PSDN, it is reasonable to expect greater volatility than occurred during the 5-months periods in the DAI/MKR data.
-![DAI/MKR](figs/DAI-MKR_all_USD.png)
+![DAI/MKR](figs/DAI-MKR_all_sml_USD.png)
 <!-- <img src="figs/DAI-MKR_all_USD.png" alt="DAI/MKR" width="600"/> -->
 
 ### RAI/ETH 2x
 To simulate IL under a period of rapid price appreciation, we used historical data from the RAI/ETH pair. Specifically for a period from June to November 2021 when ETH doubled in price relative to RAI. RAI has a relatively stable price, close to 3 USD. In order to make the figure more readable, we transform the ETH price from RAI to USD by dividing it by 3. From this simulation, it is clear that the IL is most pronounced during periods of big increases in volatility, for example, at the end of July and the beginning of September 2021. This is likely due to the predictions that go into setting the liquidity bounds. Changes in volatility are hard to predict, and thus, the bounds are likely too narrow with a resulting increase in IL.
 
-![RAI/ETH 2x](fig/RAI-ETH_2x_USD.png)
+![RAI/ETH 2x](fig/RAI-ETH_2x_sml_USD.png)
 <!-- <img src="figs/RAI-ETH_2x_USD.png" alt="RAI/ETH 2x" width="600"/> -->
 
 ### RAI/ETH volatility followed by a return to the initial price
 On a "traditional" automated marker (AMM) without concentrated liquidity, price changes don't affect the realized IL (i.e. permanent loss) as long as the liquidity position is removed once the price is back to the same value as it was when the liquidity was added. However, on an AMM with concentrated liquidity, IL is incurred every time the liquidity bounds are changed (liquidity is removed and re-added with new bounds). To simulate this scenario, we selected a 9-month period where the ETH price went through an approximately 3x-change but returned to its initial price. From the figure, we can see that an -12% IL is incurred at the end of the period, but due to the active (predictive) strategy, most IL occurs during rapid price changes.
-![RAI/ETH 2x to 1x](fig/RAI-ETH_2x_to_1x_USD.png)
+![RAI/ETH 2x to 1x](fig/RAI-ETH_2x_to_1x_sml_USD.png)
 <!-- <img src="figs/RAI-ETH_2x_to_1x_USD.png" alt="RAI/ETH 2x - 1x" width="600"/> -->
 
 ### RAI/ETH 10x
 To further explore how the magnitude of price increase influences the IL, we simulated a moonshot scenario -- a 10x increase in token price. Since we didn't find any relevant data with an actual 10x increase (😞), we had to generate semi-synthetic data. We selected a 4-month period where the ETH price increased 2.9x and scaled it to 10x. This strong price appreciation led to a 25% loss, something that might be acceptable in the face of a 10x increase.
-![RAI/ETH 10x](fig/RAI-ETH_10x_USD.png)
+![RAI/ETH 10x](fig/RAI-ETH_10x_sml_USD.png)
 <!-- <img src="figs/RAI-ETH_10x_USD.png" alt="RAI/ETH 10x" width="600"/> -->
 
 ### MKR/ETH
 Finally, we estimated future IL for the PSDN/OCEAN pair but simulating IL on historical data of the MRK/ETH pair. This simulation covers the longest time period (nearly a year) and a -2.9x drop in MKR price relative to ETH. The fast price depreciation is associated with a big increase in IL, followed by a period with a more stable price and correspondingly less IL.
-![MKR/ETH](fig/MKR-ETH_all.png)
+![MKR/ETH](fig/MKR-ETH_all_sml.png)
 <!-- <img src="figs/MKR-ETH_all.png" alt="MKR/ETH" width="600"/> -->
 
 
