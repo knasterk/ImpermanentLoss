@@ -21,7 +21,7 @@ The scripts for these simulations are available in the [IL repo](https://github.
 
 <!-- We can for example assume that the volatility of the new token will be similar to existing tokens and simulate the IL under -->
 ## Tokens
-We are interested in estimating the future IL of a DAI or RAI-like stable coin (H2O) and its corresponding governance token, PSDN (MKR or FLX-like). To estimate IL for the H2O/PSDN pair, it would be best to use RAI/FLX or DAI/MKR. Unfortunately, the RAI/FLX pool only has 166 swaps and no trades after July 2021 - not enough for simulation. For DAI/MKR the liquidity data before 2021-10-23, is corrupt leaving us with only five months, severely limiting the scenarios that can be simulated. We are primarily interested in three specific scenarios. 1) A 2x increase of the governance token (PSDN) relative to the stable coin H20, 2) a 2x increase followed by a return to the previous levels, and 3) a 10x increase of PSDN relative to H2O.
+We are interested in estimating the future IL of a DAI or RAI-like stable coin (TOK_S) and its corresponding governance token, TOK_G (MKR or FLX-like). To estimate IL for the TOK_S/TOK_G pair, it would be best to use RAI/FLX or DAI/MKR. Unfortunately, the RAI/FLX pool only has 166 swaps and no trades after July 2021 - not enough for simulation. For DAI/MKR the liquidity data before 2021-10-23, is corrupt leaving us with only five months, severely limiting the scenarios that can be simulated. We are primarily interested in three specific scenarios. 1) A 2x increase of the governance token (TOK_G) relative to the stable coin TOK_S, 2) a 2x increase followed by a return to the previous levels, and 3) a 10x increase of TOK_G relative to TOK_S.
 
 For 1) and 2), we select time periods with the appropriate price movements from the RAI/ETH pair, and for 3), we select a period where ETH 2.9x increased and scale that to 10x.
 
@@ -30,11 +30,11 @@ Thus, we focus our IL-simulations on the following pairs:
 
 |   Future pair    | Simulation pair |
 |------------------|-----------------|
-|     H2O/ETH      |      RAI/ETH    |
-|    H20/PSDN      |      DAI/MKR    |  
-|    H20/PSDN      |      RAI/ETH    |  
-|    OCEAN/PSDN    |      MKR/ETH    |
-<!-- |    H20/OCEAN     |      DAI/ETH    | -->
+|     TOK_S/ETH      |      RAI/ETH    |
+|    TOK_S/TOK_G      |      DAI/MKR    |  
+|    TOK_S/TOK_G      |      RAI/ETH    |  
+|    OCEAN/TOK_G    |      MKR/ETH    |
+<!-- |    TOK_S/OCEAN     |      DAI/ETH    | -->
 
 
 ## How to run the script
@@ -52,7 +52,7 @@ The script `simulation_script.py` will run the simulations described below and g
 ## Results
 
 ### DAI/MKR
-To get a sense of what IL to expect in the future for the H2O/PSDN pair, we simulated IL on historical data of the DAI/MKR pair. From the simulation, it is apparent that the IL increases (down to -12 %) during fast price changes (end of January 2022). However, for a new pair like H2O/PSDN, it is reasonable to expect greater volatility than occurred during the 5-months periods in the DAI/MKR data.
+To get a sense of what IL to expect in the future for the TOK_S/TOK_G pair, we simulated IL on historical data of the DAI/MKR pair. From the simulation, it is apparent that the IL increases (down to -12 %) during fast price changes (end of January 2022). However, for a new pair like TOK_S/TOK_G, it is reasonable to expect greater volatility than occurred during the 5-months periods in the DAI/MKR data.
 ![DAI/MKR](figs/DAI-MKR_all_sml_USD.png)
 <!-- <img src="figs/DAI-MKR_all_USD.png" alt="DAI/MKR" width="600"/> -->
 
@@ -73,7 +73,7 @@ To further explore how the magnitude of price increase influences the IL, we sim
 <!-- <img src="figs/RAI-ETH_10x_USD.png" alt="RAI/ETH 10x" width="600"/> -->
 
 ### MKR/ETH
-Finally, we estimated future IL for the PSDN/OCEAN pair but simulating IL on historical data of the MRK/ETH pair. This simulation covers the longest time period (nearly a year) and a -2.9x drop in MKR price relative to ETH. The fast price depreciation is associated with a big increase in IL, followed by a period with a more stable price and correspondingly less IL.
+Finally, we estimated future IL for the TOK_G/OCEAN pair but simulating IL on historical data of the MRK/ETH pair. This simulation covers the longest time period (nearly a year) and a -2.9x drop in MKR price relative to ETH. The fast price depreciation is associated with a big increase in IL, followed by a period with a more stable price and correspondingly less IL.
 ![MKR/ETH](fig/MKR-ETH_all_sml.png)
 <!-- <img src="figs/MKR-ETH_all.png" alt="MKR/ETH" width="600"/> -->
 
