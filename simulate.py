@@ -3,7 +3,6 @@ import numpy as np
 import AutoRegressiveStrategy as ARS
 import ActiveStrategyFramework as ASF
 import itertools
-# from scipy import stats
 import importlib
 import matplotlib.pyplot as plt
 
@@ -171,44 +170,39 @@ def get_best_strategy(sim_results, strategy):
 
 def save_results(results, fname):
     """
-    Index(['time', 'price', 'reset_point', 'reset_reason', 'volatility',
-       'return_forecast', 'base_range_lower', 'base_range_upper',
-       'limit_range_lower', 'limit_range_upper', 'reset_range_lower',
-       'reset_range_upper', 'price_at_reset', 'token_0_fees', 'token_1_fees',
-       'token_0_fees_uncollected', 'token_1_fees_uncollected',
-       'token_0_left_over', 'token_1_left_over', 'token_0_allocated',
-       'token_1_allocated', 'token_0_total', 'token_1_total',
-       'value_position_in_token_0', 'value_allocated_in_token_0',
-       'value_left_over_in_token_0', 'base_position_value_in_token_0',
-       'limit_position_value_in_token_0', 'value_position_usd',
-       'base_position_value_usd', 'limit_position_value_usd', 'cum_fees_usd',
-       'token_0_hold_usd', 'token_1_hold_usd', 'value_hold_usd', 'IL']
     """
-    il = (results['value_position_usd'] - results['value_hold_usd']) / results['value_hold_usd']
-    results['IL'] = il
-
-    # cols = ['time', 'IL']
+    results['IL'] = (results['value_position_usd'] - results['value_hold_usd']) / results['value_hold_usd']
 
     results.to_csv(fname)
 
     return results
 
 
-def plot_impermanet_loss(results_fname, title, quoteCurrency, fig_fname):
+def plot_impermanet_loss(results_fname,
+                         title,
+                         quoteCurrency,
+                         fig_fname,
+                         figsize=(10, 5.5)):
     """
     """
     results = pd.read_csv(results_fname)
     results['time'] = pd.to_datetime(results['time'], utc=True)
     results.set_index('time', inplace=True)
 
-    fig = plt.figure(figsize=(12, 6))
+    fig = plt.figure(figsize=figsize)
 
-    ax1 = fig.add_axes((0.07, 0.2, 0.85, 0.7))
+    # ax1 = fig.add_axes((0.07, 0.12, 0.84, 0.8))
+    ax1 = fig.add_axes((0.11, 0.16, 0.77, 0.72))
     (results['IL'] * 100).plot(ax=ax1, label='Impermanent Loss')
     ax1.set_ylabel('Impermanent Loss (%)')
     ax1.set_title(title)
-    ax1.set_xlabel('Time')
+    ax1.set_xlabel('Date')
     ax1.legend(loc='upper left')
+    ylim = ax1.get_ylim()
+    xlim = ax1.get_xlim()
+    plt.grid()
+    ax1.set_ylim(ylim)
+    ax1.set_xlim(xlim)
 
     label = f"{title.split('/')[0]} price in {quoteCurrency}"
 
@@ -218,11 +212,22 @@ def plot_impermanet_loss(results_fname, title, quoteCurrency, fig_fname):
     # ax2.plot(0, 0, color='tab:orange', label='price')
     ax2.set_ylabel(f'Price ({quoteCurrency})')
     ax2.legend(loc='upper right')
+    xlim = ax2.get_xlim()
+
+    ax1.spines['left'].set_position(('outward', 7))
+    ax1.yaxis.set_ticks_position('left')
+    ax2.xaxis.set_ticks_position('bottom')
+    ax2.spines['right'].set_position(('outward', 7))
+    ax2.yaxis.set_ticks_position('right')
+    ax1.spines['bottom'].set_visible(False)
+    ax2.spines['top'].set_visible(False)
+    ax1.spines['top'].set_visible(False)
+    ax2.spines['left'].set_visible(False)
+    ax1.spines['right'].set_visible(False)
+
+    ax2.set_xlim(xlim)
 
     fig.savefig(f'{fig_fname}.png')
-    # fig.savefig(f'{fig_fname}.svg')
-    fig.savefig(f'{fig_fname}.pdf')
-    # fig.savefig(f'{fig_fname}.eps')
 
     if 'RAI' in title:
         price_usd = 3. / results['price']
@@ -240,14 +245,17 @@ def plot_impermanet_loss(results_fname, title, quoteCurrency, fig_fname):
     else:
         return
 
-    fig = plt.figure(figsize=(12, 6))
+    # fig = plt.figure(figsize=(12, 6))
+    fig = plt.figure(figsize=figsize)
 
-    ax1 = fig.add_axes((0.07, 0.2, 0.85, 0.7))
+    # ax1 = fig.add_axes((0.07, 0.12, 0.84, 0.8))
+    ax1 = fig.add_axes((0.11, 0.16, 0.76, 0.75))
     (results['IL'] * 100).plot(ax=ax1, label='Impermanent Loss')
     ax1.set_ylabel('Impermanent Loss (%)')
     ax1.set_title(title)
-    ax1.set_xlabel('Time')
+    ax1.set_xlabel('Date')
     ax1.legend(loc='upper left')
+    plt.grid()
 
     ax2 = ax1.twinx()
     price_usd.plot(ax=ax2, color='tab:orange', label=label)
@@ -255,15 +263,16 @@ def plot_impermanet_loss(results_fname, title, quoteCurrency, fig_fname):
     # ax2.plot(0, 0, color='tab:orange', label='price')
     ax2.set_ylabel(ylabel)
     ax2.legend(loc='upper right')
-    ax2.spines['right'].set_position(('outward', 5))
-    ax2.spines['left'].set_position(('outward', 5))
+
+    ax1.spines['left'].set_position(('outward', 7))
+    ax1.yaxis.set_ticks_position('left')
+    ax2.xaxis.set_ticks_position('bottom')
+    ax2.spines['right'].set_position(('outward', 7))
+    ax2.yaxis.set_ticks_position('right')
+    ax1.spines['bottom'].set_visible(False)
     ax2.spines['top'].set_visible(False)
     ax1.spines['top'].set_visible(False)
+    ax2.spines['left'].set_visible(False)
     ax1.spines['right'].set_visible(False)
-    ax1.spines['left'].set_visible(False)
-
 
     fig.savefig(f'{fig_fname}_USD.png')
-    # fig.savefig(f'{fig_fname}.svg')
-    fig.savefig(f'{fig_fname}_USD.pdf')
-    # fig.savefig(f'{fig_fname}.eps')
